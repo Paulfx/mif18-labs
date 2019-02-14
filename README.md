@@ -1,4 +1,6 @@
 # Repo for MIF12 Labs
 
+LG, feb 2019
+
 ## First Lab : Arduino 101 
-	[clickhere](TP01/README.md)
+	[LAB1](https://github.com/lauregonnord/mif12-labs/blob/master/TP01/README.md)
