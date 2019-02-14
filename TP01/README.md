@@ -18,9 +18,9 @@ breadboard, wires ...  **You will be responsible for them for the
 duration of this lab** On the breadboards, all points in a given
 supply line (blue/black, read) are connected. Same for the
 columns. More details about the experimental setup are available here:
-[Board details](https://github.com/lauregonnord/mif12-labs/TP01/_board.md)
+[Board details](https://github.com/lauregonnord/mif12-labs/blob/master/TP01/_board.md)
 
-The kick-off code of this lab is available under the [code directory](https://github.com/lauregonnord/mif12-labs/TP01/_code)
+The kick-off code of this lab is available under the [code directory](https://github.com/lauregonnord/mif12-labs/blob/master/TP01/_code)
 
 
 ## Step 0b : Arduino Programming Style
