@@ -57,7 +57,7 @@ Connect the board so that to make a circuit with a led, a resistor and
 the arduino pin 13:
 
 <p align="center">
-  <img src="figs/p-led_schema1_cut.png"/>
+  <img src="figs/p-led_schema1_port13_cut.png"/>
 </p>
 
 
