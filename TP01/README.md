@@ -13,12 +13,14 @@ interact with sensors/actuators.
 
 ## Step 0 : Hardware and Software setting.
 
+
 You will be given a whole platform with an Arduino UNO, some leds, a
 breadboard, wires ...  **You will be responsible for them for the
 duration of this lab** On the breadboards, all points in a given
 supply line (blue/black, read) are connected. Same for the
 columns. More details about the experimental setup are available here:
 [Board details](https://github.com/lauregonnord/mif18-labs/blob/master/TP01/_board.md)
+
 
 The kick-off code of this lab is available under the [code directory](https://github.com/lauregonnord/mif18-labs/blob/master/TP01/_code)
 
@@ -89,10 +91,11 @@ the documentation is for the Arduino Lib format. In raw C, you should use
 ## Step 2: Two LEDs with different frequencies (ex2/)
 
 Now make two leds blink at different frequencies (the second one uses
-PIN 12).
+PIN 12). Make your code as generic as possible.
 
 In the README, explain your solution for different values of the
-frequencies. Make your code as generic as possible.
+frequencies. Explain why is it satisfactory or not ? What would you
+like as a developper.
 
 
 ## Step 3: Led, Button, 7 segment V1 (ex3/)
@@ -154,7 +157,7 @@ And use it to increment the 7 segment value each time you enter the
 
 ## Step 4: Led, Button, 7 segment V2 (ex4/)
 
-A little journey into the Arduino library.
+A little journey into the Arduino library. 
 
 ## The LED example
 * Include `Arduino.h` and link with the lib (the Makefile does this

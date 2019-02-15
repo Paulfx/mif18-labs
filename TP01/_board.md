@@ -6,10 +6,10 @@
 ![Arduino Uno Platform](figs/arduino-uno-dip-rev3.jpg)
 
   * You may have to install the following (Linux) packages: `arduino` ,
-`gcc-avr` and `avrdude` (`avr-binutils` et `avr-libc` if they are not included)
+`gcc-avr` (or `avr-gcc`) and `avrdude` (`avr-binutils` et `avr-libc` if they are not included)
   * `avrdude.conf` must be in `/usr/share/arduino/hardware/tools/` (if not you have to modify Makefiles).
   * The user should have the right to write on  the USB port :
-`usermod -aG dialout <username>`
+`usermod -aG dialout <username>` (and re-login).
 
 
 ### Some Arduino general information
@@ -28,34 +28,41 @@ microcontroler memory.
 You will be given a whole platform with an arduino UNO, some leds, a
 breadboard, wires ...  **You will be responsible for them for the
 duration of the lab** On the breadboards, all points in a given
-supply line (blue/black, read) are connected. Same for the columns.
+supply line (blue/black, red) are connected. Same for the columns.
 
 
 
-## Example Applications
+## Getting started with the breadboard.
 
-![Arduino Uno Platform](figs/montage.jpg)
+First of all, make a simple circuit to test the board itself: 
+
+![Simple led](figs/mini_circuit.png)
+
+The board should be powered : blue/black line to arduino ground (GND)
+and red line to arduino +5V. Plug the arduino to the USB port of your
+laptop, the led should shine. 
+
+Now, let us program a blinking LED. 
+
+**From now, shematics implicitely contain the wire required to power
+the board (link from red lines to 5V, link from blue/black lines to GND)**
 
 
-### Switch the light on!
-
-The led changes its state (on/off) every time the button is pressed.
+### LED on Digital 13
 
 * Led on digital 13 with 220 ohm resistor. (long leg to digital 13)
-* Button on digital 10, and 220 ohm resistor.
 
 ![Arduino Uno + Led on Port Digital 13](figs/p-led_schema1_port13_cut.png)
+
+
+### Button on Digital 10
+
+* Button on digital 10, and 220 ohm resistor.
+
 ![Button on Port Digital 10](figs/p-boutonpoussoir_arduino.png)
 
 
-### Count to 9
-
-The seven segment display numbers from 0 to 9 then 0, and so one, with a frequency of 1Hz. Of the user
-press the button, then it resets and continue to count from 0.
-
-![Expected behavior](figs/expected_behavior_cr10.png)
-
-#### Arduino/7seg
+### Arduino/7seg on Digital 1 to 7
 
 * The seven segment displays can be "common cathode" or "common anode"
   (vertical common anode for us!)
@@ -68,5 +75,5 @@ press the button, then it resets and continue to count from 0.
 
 ![Arduino Uno + 7 seg Common Anode Vertical](figs/7SegmentAC_vertical_bb.png)
 
-**Warning, the 7 segment displays should be connected though resistors
+**Warning, the 7 segment display should be connected though resistors
 (from 220 to 400 ohm)**
