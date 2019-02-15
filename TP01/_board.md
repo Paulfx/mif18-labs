@@ -36,7 +36,7 @@ supply line (blue/black, red) are connected. Same for the columns.
 
 First of all, make a simple circuit to test the board itself: 
 
-![Simple led](figs/mini_circuit.png)
+![Simple led](figs/p-mini_circuit_cut.png)
 
 The board should be powered : blue/black line to arduino ground (GND)
 and red line to arduino +5V. Plug the arduino to the USB port of your
