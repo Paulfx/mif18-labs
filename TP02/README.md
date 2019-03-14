@@ -214,8 +214,8 @@ L'ordonnanceur réalisera donc l'algorithme suivant~:
 ####  TODO : Dans le main:
 
 * Observez les deux macros de stockage du contexte. Attention,
-  dans ces macros, on appelle la fonction \verb!cli! pour stopper les
-  interruptions. La conséquence est qu'il faudra relancer \verb!sei! à
+  dans ces macros, on appelle la fonction `cli` pour stopper les
+  interruptions. La conséquence est qu'il faudra relancer `sei` à
   chaque reprise en main de l'ordonnanceur.
 
 * Modifier l'ordonnanceur Round Robin précédent (avec un
@@ -247,11 +247,11 @@ partagée).
   des sémaphores), qui vérifie si le port série est disponible, si oui
   le prend, si non la tâche l'exécutant est suspendue.
 
-\item Écrivez une primitive `release_serial` (similaire au
+* Écrivez une primitive `release_serial` (similaire au
   V/Signal des sémaphores), qui rend le port série et, si besoin, rend
   active la tâche suspendue.
 
-\item Modifiez le code des tâches et de l'ordonnanceur en
+* Modifiez le code des tâches et de l'ordonnanceur en
   conséquence. Notez bien que les primitives `take_serial` et
   `release_serial` doivent être ininterruptibles !
 
