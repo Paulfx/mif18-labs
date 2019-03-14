@@ -129,7 +129,7 @@ réaliser l'ordonnanceur. Vous devez commencer par créer une structure
 (tableau de structs) représentant les différentes tâches (ici
 3). Chaque structure de tâche sauvegardera ici son état (`RUNNING`,
 `NOT_STARTED`):
- ```
+ ```C
 typedef struct task_s {
         volatile uint16_t stack_pointer; // variable pour stocker SP
         volatile uint8_t state;         // RUNNING ou NOT_STARTED
@@ -137,7 +137,7 @@ typedef struct task_s {
 } task_t;
 ```
 L'ordonnanceur suivra donc l'algorithme suivant~:
-```
+```C
   currentask <- nexttask()
   if currenttask.state == RUNNING //la tâche a déjà été interrompue
      then
@@ -165,7 +165,7 @@ Pour pouvoir reprendre l'exécution d'une tâche ``au bon endroit''
 après interruption, il faut sauvegarder ``le contexte'', ie l'ensemble
 des valeurs des registres à une certaine adresse dans la pile (SP) au moment de
 son interruption. On modifiera la structure de tâche en:
-```
+```C
 typedef struct task_s {
         volatile uint16_t stack_pointer; // variable pour stocker SP.
         volatile uint8_t state; // toujours RUNNING ou NOT_STARTED
@@ -195,7 +195,7 @@ Pointer). Ce dernier est rendu directement accessible par
 `gcc-avr` via la "variable" SP.
 
 L'ordonnanceur réalisera donc l'algorithme suivant~:
-```
+```C
   SAVE_CONTEXT();       // sur la pile
   currenttask.saveSP(); // sauver le SP dans la tâche
   sei();          // permettre les interruptions
