@@ -191,6 +191,7 @@ void task_lcd(void)
   // TODO : init, and send a message (infinite loop)
 	
 	init_task_lcd();
+	//lcd_write_instruction_4d(lcd_Clear);
 	
 	 // display the first line of information */
 	while(1) {
@@ -202,7 +203,7 @@ void task_lcd(void)
 		lcd_write_string_4d("Bonjour"); //Take 80us = negligeable
 		_delay_ms(400);
 		lcd_write_instruction_4d(lcd_Clear);
-		_delay_ms(4);
+		_delay_ms(100);
 		
 		
 		
@@ -230,9 +231,28 @@ static task_t tasks[] = {
 ISR(TIMER1_COMPA_vect)
 {
   static int current_task = 0 ;
+	current_task = (current_task + 1) % NB_TASK;
   PORTC ^= 2 ; // Yellow led blinks to show its activity
 
   // TODO : implement the scheduler.
+	
+	task_t task = tasks[current_task];
+	
+	if (task.state == RUNNING)  {
+			sei();
+			task.start();
+	}
+	else {
+		task.state = RUNNING;
+		sei();
+		task.start();
+	}
+	
+	
+	
+	
+	
+	
 }
 
 int main(void)
@@ -240,12 +260,14 @@ int main(void)
   // Nothing to do.
   init_led_yellow();// the yellow led blinks to show the sheduler activity.
   init_timer() ;
-  sei() ;
 	init_serial();
+	
+
+  sei() ;
 	//task_led();
 	//task_lcd();
 	
-	task_serial();
+	//task_serial();
   while(1) // waits the first task, and then not useful any more.
     {
     }
