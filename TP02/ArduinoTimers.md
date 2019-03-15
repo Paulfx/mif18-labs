@@ -9,7 +9,7 @@ OCR1A dans notre cas). Si ils sont égaux, une interruption est
 générée. Le programme est alors dérouté pour exécuter la fonction
 correspondante et le compteur est réinitialisé.
 
-Un exemple http://http://www.avrbeginners.net/architecture/timers/timers.html
+Un exemple http://www.avrbeginners.net/architecture/timers/timers.html
 
 
 
