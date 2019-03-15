@@ -4,20 +4,25 @@
 #include <avr/interrupt.h> 	
 #include <util/delay.h>  	// for the _delay_ms
 
+#include <stdio.h>
+
 #define PRESCALER
 #define TIME_SLOT
 
 
-#define NB_TICK 4242  // change here
+#define NB_TICK 6250 // 400ms
 
 void init_led_red(void)
 {
   // TODO : init, red led is on analog 0
+	
+	DDRC |= 0b000001;
+	
 }
 
 void init_led_yellow(void)
 {
-  // TODO : init, yellow led on analog 1
+  DDRC |= 0b000010;
 }
 
 
@@ -36,24 +41,34 @@ void task_led_red(void)
 {
   // TODO : call to init for the red led
   // then blink, then wait (delay)
+	
+	PORTC ^= 0b000001;//blink
+	_delay_ms(200);//delay
+	
 }
 
 
 ISR(TIMER1_COMPA_vect)
 {
-  // TODO : blink the yellow led
+  PORTC ^= 0b000010;
+	
 }
 
 
 
 int main(void)
 {
-  // TODO : init yellow led + timer.
+	init_timer();
+	init_led_red();
+	init_led_yellow();
+	
   sei(); // this is mandatory
   
   while(1)
     {
-      // TODO : which task(s) ?
+      
+		task_led_red();
+		
     }
   
   return 0;
