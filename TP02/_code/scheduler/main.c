@@ -115,12 +115,12 @@ void init_timer()
 
 void init_led_red(void)
 {
-  // TODO : red led on analog 0
+  DDRC |= 0b000001; //Analog 0
 }
 
 void init_led_yellow(void)
 {
-  // TODO : yellow led on analog 1
+ DDRC |= 0b000010; //Analog 1
 }
 
 void init_serial(void)
@@ -157,18 +157,56 @@ void init_task_lcd(){
 void task_serial(void)
 {
   // TODO : write a message on the serial port, redo, ...
+	
+	char* msg = "Bonjour";
+	int l = 7;
+	int i = 0;
+	while(1) {
+		i = 0;
+		for (; i < l; i++) {
+			send_serial(msg[i]);
+			_delay_ms(100);
+		}
+		
+	}
+	
 }
 
 
 void task_led(void)
 {
   // TODO : init, then blink red led (infinite loop)
+	
+	init_led_red();
+	
+	while(1) {
+		PORTC ^= 0b000001;//blink
+		_delay_ms(300);//delay
+	}
 }
 
 
 void task_lcd(void) 
 {
   // TODO : init, and send a message (infinite loop)
+	
+	init_task_lcd();
+	
+	 // display the first line of information */
+	while(1) {
+		
+		 //lcd_write_instruction_4d(lcd_SetCursor | lcd_LineTwo+ 5);
+		
+		
+		//lcd_write_instruction_4d(lcd_Clear); //Clear
+		lcd_write_string_4d("Bonjour"); //Take 80us = negligeable
+		_delay_ms(400);
+		lcd_write_instruction_4d(lcd_Clear);
+		_delay_ms(4);
+		
+		
+		
+	}
 }
 
 
@@ -203,6 +241,11 @@ int main(void)
   init_led_yellow();// the yellow led blinks to show the sheduler activity.
   init_timer() ;
   sei() ;
+	init_serial();
+	//task_led();
+	//task_lcd();
+	
+	task_serial();
   while(1) // waits the first task, and then not useful any more.
     {
     }
