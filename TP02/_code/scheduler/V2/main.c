@@ -156,7 +156,7 @@ void init_task_lcd(){
 // NOW TASKS : infinite loops
 void task_serial(void)
 {
-  // TODO : write a message on the serial port, redo, ...
+  //write a message on the serial port, redo, ...
 	
 	char* msg = "Bonjour";
 	int l = 7;
@@ -175,7 +175,7 @@ void task_serial(void)
 
 void task_led(void)
 {
-  // TODO : init, then blink red led (infinite loop)
+  //init, then blink red led (infinite loop)
 	
 	init_led_red();
 	
@@ -188,7 +188,7 @@ void task_led(void)
 
 void task_lcd(void) 
 {
-  // TODO : init, and send a message (infinite loop)
+  //init, and send a message (infinite loop)
 	
 	init_task_lcd();
 	//lcd_write_instruction_4d(lcd_Clear);
@@ -215,7 +215,7 @@ void task_lcd(void)
 typedef struct task_s {
   volatile uint8_t state;
   void (*start)(void);//code for the task
-  volatile uint16_t stack_pointer;// only use in V2
+  volatile uint16_t stack_pointer;//to store SP
 } task_t;
 
 // The third element is not useful for V1
@@ -230,49 +230,44 @@ static task_t tasks[] = {
 // The isr interruption implements the scheduling activity
 ISR(TIMER1_COMPA_vect)
 {
-  static int current_task = 0 ;
-	current_task = (current_task + 1) % NB_TASK;
-  PORTC ^= 2 ; // Yellow led blinks to show its activity
-
-  // TODO : implement the scheduler.
-	
+	static int current_task = 0 ;
+	PORTC ^= 2 ; // Yellow led blinks to show its activity
 	task_t task = tasks[current_task];
-	
+
+	SAVE_CONTEXT()
+	//Store SP in current task
+	task.stack_pointer = SP;
+	sei();
+
+	//Next task
+	current_task = (current_task + 1) % NB_TASK;
+	task = tasks[current_task];
+	//Get SP
+	SP = task.stack_pointer;
 	if (task.state == RUNNING)  {
+			RESTORE_CONTEXT()
 			sei();
-			task.start();
 	}
 	else {
+		//First launch
 		task.state = RUNNING;
 		sei();
 		task.start();
 	}
-	
-	
-	
-	
-	
-	
 }
 
 int main(void)
 {
-  // Nothing to do.
-  init_led_yellow();// the yellow led blinks to show the sheduler activity.
-  init_timer() ;
+	init_led_yellow();// the yellow led blinks to show the sheduler activity.
+	init_timer();
 	init_serial();
 	
+	sei() ;
+	while(1) // waits the first task, and then not useful any more.
+	{
+	}
 
-  sei() ;
-	//task_led();
-	//task_lcd();
-	
-	//task_serial();
-  while(1) // waits the first task, and then not useful any more.
-    {
-    }
-
-  return 0;
+  	return 0;
 }
 
 
