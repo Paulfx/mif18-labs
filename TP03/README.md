@@ -11,40 +11,41 @@ Sur la page web de Thierry [ici](http://perso.univ-lyon1.fr/thierry.excoffier/CO
 
 ### Quelle architecture pour quelle application.
 
-+----------------+------------------------------------------------------------+
-| Parallélisme   | Un traitement unique prenant du temps.                     |
-|                |                                                            |
-|                | On le répartit le travail intelligemment.                  |
-+----------------+------------------------------------------------------------+
-| Temps partagé  | Partager le temps d'un processeur entre des tâches.        |
-|                |  * mauvaise idée en non-interactif                         |
-|                |  * augmente le temps de réponse                            |
-|                |  * casse les caches                                        |
-|                |  * changement de contexte.                                 |
-|                |                                                            |
-|                | Souvent utilisé car les IO sont synchrones.                |
-|                |                                                            |
-|                | Très utile quand on ne connaît pas le temps d'exécution.   |
-+----------------+------------------------------------------------------------+
-| Multi-tâche    | Gestion des zones critiques.                               |
-|                |                                                            |
-|                | Optimum : une tâche par processeur                         |
-+----------------+------------------------------------------------------------+
-| Asynchrone /   | Une seule tâche traitant une liste d'événements.           |
-|                |                                                            |
-| Événementiel   | Utilisation optimum des ressources CPU et cache.           |
-|                |                                                            |
-|                | Avantage : pas de section critique.                        |
-|                |                                                            |
-|                | Inconvénient : les traitements doivent être courts.        |
-|                | car non-préemptible.                                       |
-+----------------+------------------------------------------------------------+
-| Ordonnancement | Le serveur optimise la liste des événements à traiter      |
-| applicatif     | afin de minimiser l'utilisation CPU et disque.             |
-|                |                                                            |
-|                | Par exemple détruire 2 caractères plutôt que faire         |
-|                | deux destructions de 1 caractère.                          |
-+----------------+------------------------------------------------------------+
+
+| Parallélisme   | Un traitement unique prenant du temps.                   |
+|                |                                                          |
+|                | On le répartit le travail intelligemment.                |
+|----------------|----------------------------------------------------------|
+| Temps partagé  | Partager le temps d'un processeur entre des tâches.      |
+|                | * mauvaise idée en non-interactif                        |
+|                | * augmente le temps de réponse                           |
+|                | * casse les caches                                       |
+|                | * changement de contexte.                                |
+|                |                                                          |
+|                | Souvent utilisé car les IO sont synchrones.              |
+|                |                                                          |
+|                | Très utile quand on ne connaît pas le temps d'exécution. |
+|----------------|----------------------------------------------------------|
+| Multi-tâche    | Gestion des zones critiques.                             |
+|                |                                                          |
+|                | Optimum : une tâche par processeur                       |
+|----------------|----------------------------------------------------------|
+| Asynchrone /   | Une seule tâche traitant une liste d'événements.         |
+|                |                                                          |
+| Événementiel   | Utilisation optimum des ressources CPU et cache.         |
+|                |                                                          |
+|                | Avantage : pas de section critique.                      |
+|                |                                                          |
+|                | Inconvénient : les traitements doivent être courts.      |
+|                | car non-préemptible.                                     |
+|----------------|----------------------------------------------------------|
+| Ordonnancement | Le serveur optimise la liste des événements à traiter    |
+| applicatif     | afin de minimiser l'utilisation CPU et disque.           |
+|                |                                                          |
+|                | Par exemple détruire 2 caractères plutôt que faire       |
+|                | deux destructions de 1 caractère.                        |
+|----------------|----------------------------------------------------------|
+|                |                                                          |
 
 ### La notion de 'continuation'
 
@@ -140,7 +141,6 @@ Mais pour le moment tout les traitements sont synchrones.
 
 
 ### Programmation asynchrone en Python.
-===================================
 
 Toutes les entrées sorties utilisent des continuations
 afin de rendre la main à l'orchestrateur.
