@@ -1,10 +1,10 @@
 # MIF12-Lab 2: Round Robin Scheduler on Arduino.
 
   * Laure Gonnord, Université Lyon 1, LIP [email](mailto:laure.gonnord@univ-lyon1.fr)
-  * Version: 2019.02
+  * Version: 2019.03 Last modif 20/3.
   * Inspired by a lab with Julien Forget and Thomas Vantroys, Lille
   * Other collaborators: Thierry Excoffier (Lyon1)
-  * Deadline : TBA
+  * Deadline : 29/3 18H sur Tomuss
 
 ## Problem Description 
 
@@ -121,7 +121,7 @@ aussi). Le code fourni se trouve dans le répertoire `scheduler`:
 * Testez individuellement chacune de ces tâches.
 
 
-### Ordonnanceur RR sans sauvegarde de contexte (V1)
+### Ordonnanceur RR sans sauvegarde de contexte (V1, 30% de la note)
 
 
 Maintenant que vos différentes tâches fonctionnent, vous pouvez
@@ -131,9 +131,8 @@ réaliser l'ordonnanceur. Vous devez commencer par créer une structure
 `NOT_STARTED`):
  ```C
 typedef struct task_s {
-        volatile uint16_t stack_pointer; // variable pour stocker SP
-        volatile uint8_t state;         // RUNNING ou NOT_STARTED
-   // vous pouvez ajouter (un pointeur vers) la fonction de la tâche
+   volatile uint8_t state;         // RUNNING ou NOT_STARTED
+   void (*start)(void);            //code for the task
 } task_t;
 ```
 L'ordonnanceur suivra donc l'algorithme suivant~:
@@ -141,7 +140,7 @@ L'ordonnanceur suivra donc l'algorithme suivant~:
   currentask <- nexttask()
   if currenttask.state == RUNNING //la tâche a déjà été interrompue
      then
-          currenttask.relaunch(); 
+          currenttask.relaunch(); // en vrai, utilise la fonction start
      else  // premier lancement de la tâche
           currenttask.state = RUNNING ;
           sei();                 //permettre les interruptions. 
@@ -154,12 +153,19 @@ Codez cet ordonnanceur (répertoire scheduler/)
 * La période de l'ordonnanceur sera de 40 ms. Pour faciliter le
   debug, chaque fois que l'ordonnanceur s'exécute, vous allumerez la
   LED jaune.
+* Ajout 20/03: évidemment, comme il y a une interruption toutes les
+  40ms, les périodes des tâches n'ont plus vraiment de sens, on ne
+  demande pas ici de modifier ce comportement.
 * Mettez en évidence le problème de non-restoration de contexte~:
-  les tâches reprennent toujours au début.
+  les tâches reprennent toujours au début et 
 * Après avoir testé, sauvez cette v1 dans un répertoire à part `scheduler/V1/`
+* (dans V1, il y aura un code complet qui compile, commenté, avec un
+  readme, et quelques lignes d'explication des fonctionalités et ce
+  que vous observez.
 
 
-### Ordonnanceur avec sauvegarde de contexte (V2)
+
+### Ordonnanceur avec sauvegarde de contexte (V2, 40% de la note)
 
 Pour pouvoir reprendre l'exécution d'une tâche ``au bon endroit''
 après interruption, il faut sauvegarder ``le contexte'', ie l'ensemble
@@ -224,7 +230,7 @@ L'ordonnanceur réalisera donc l'algorithme suivant~:
 * Sauvegardez cette version dans `scheduler/V2/`
 
 
-### Ordonnanceur avec ressource partagée. 
+### Ordonnanceur avec ressource partagée. (30% de la note)
 
 On souhaite maintenant rajouter une tâche supplémentaire qui envoie en
 boucle le caractère `'@'`  sur le port série. Ceci nécessite donc
@@ -242,8 +248,13 @@ partagée).
 
 #### TODO
 
-* Faites une étude sérieuse du problème
-Écrivez une primitive `take_serial` (similaire au P/Wait
+* Faites une étude sérieuse du problème dans un README. Si vous
+  manquez de temps, je préfère que cette étude soit faite, avec les
+  primitives suivantes en pseudo code plutôt qu'une implementation
+  buguée. (le tiers des points de la partie sera donné sur cette
+  étude. Des dessins scannés peuvent aider.
+
+* Écrivez une primitive `take_serial` (similaire au P/Wait
   des sémaphores), qui vérifie si le port série est disponible, si oui
   le prend, si non la tâche l'exécutant est suspendue.
 
@@ -255,11 +266,13 @@ partagée).
   conséquence. Notez bien que les primitives `take_serial` et
   `release_serial` doivent être ininterruptibles !
 
-* Commentez correctement votre code, documentez dans un
-  README. Sauvegardez cette version dans `scheduler/V3/`
+* Commentez correctement votre code, ajoutez dans le README le statut
+  de votre implementation. Sauvegardez cette version dans
+  `scheduler/V3/`
   
 
 
-### Rendu tgz de tout, avec un README
+### Rendu tgz (merci de faire clean)
 
-TBA
+* V1, V2, V3, avec les readme.
+* Deadline 29/3/2019, 18H sous tomuss.
