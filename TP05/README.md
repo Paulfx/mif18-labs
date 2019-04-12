@@ -13,14 +13,23 @@
 
 ## Getting Started!
 
-First launch the script to install Lustre, and play with the provided Lustre examples
-and the luciole simulator:
+* First launch the script to install Lustre
+
+```
+chmod +x lance_lustre.sh
+lance_lustre.sh linux64
+```
+
+* play with the provided Lustre examples and the luciole simulator:
 ```
 luciole edge.lus edge
 ```
 
 In luciole, use "sim2chro" functionality to play with I/Os and draw
 timing pictures.
+
+* Same install as Lab1
+[Link to the Lab1 board](https://github.com/lauregonnord/mif18-labs/blob/master/TP01/_board.md)
 
 ## Write variants of counters
 
@@ -64,6 +73,7 @@ Take inspiration from Lab 1 and encode the same functionality, in
 Lustre. Simulate your lustre code (luciole) and adapt the glue
 library.
 
+
 Bonus if you encode a functionality involving the LCD screen.
 
 ## Documentation & Bibliography
@@ -95,5 +105,5 @@ modify `main.c` and the glue code.
 test!
 
 ## Rendu
-	pas de rendu cette fois mais il faut avoir une chaîne
-    fonctionnelle pour le prochain TP Lustre.
+	Nothing this time but the Lustre compiler chain + glue should be
+    operational for future labs.
