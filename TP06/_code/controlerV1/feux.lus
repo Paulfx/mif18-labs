@@ -1,0 +1,10 @@
+include "utiles.lus"
+(*V1 du controleur de feux Lustre*)
+
+
+node feux (TD : bool; TI : bool; CP : bool) returns (veilleuses : bool; codes : bool; phares : bool);
+var
+   tout_eteint : bool;
+let
+  (*TODO!*)
+tel
