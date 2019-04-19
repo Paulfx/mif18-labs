@@ -1,0 +1,44 @@
+include "utiles.lus"
+
+(* Controler V2 *)
+
+(*
+   Il suffit de ``greffer'' la gestion de AB et LP :
+   - une variable anti_b_select vraie si les a.b. sont selectionnes
+   - une variable longue_p_select vraie si les l.p. sont selectionnees
+
+  N.B. : noter l'importance du fait que le switch puisse etre utilise
+  avec une seulle commande onoff.
+*)
+
+(* TODO !*)
+node feux2 (
+   TD : bool;
+   TI : bool;
+   CP : bool;
+   LP, AB : bool
+) returns (
+   veilleuses : bool;
+   codes : bool;
+   phares : bool;
+   anti_b : bool;
+   longue_p : bool;
+);
+
+  (*
+   Verification :
+   On va forcement avoir besoin d'assertions sur les entrees !
+   En general, l'exclusivite des entrees TD, TI et CP suffit
+	(c'est le cas pour la sol. precedente).
+   Mais il se peut que le programme ait aussi besoin d'une assertion plus 
+   complexe : on ne peut pas avoir plus de 2 TD sans un TI et reciproquement,
+   ce qui devient assez dur a ecrire.
+
+   N.B. Pour la preuve, on a tout interet a traiter les prop. les unes
+   apres les autres
+*)
+
+node veriffeux(TD : bool;
+               TI : bool;
+               CP : bool;
+               LP, AB : bool ) returns ( ok : bool );

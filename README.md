@@ -19,3 +19,7 @@ LG, Fev-June 2019, Univ Lyon1
 ## Lab 5 : Lustre
 
 :arrow_forward:[link](https://github.com/lauregonnord/mif18-labs/blob/master/TP05/README.md)
+
+## Lab 6 : Verified embedded software with LustreArduino
+
+:arrow_forward:[link](https://github.com/lauregonnord/mif18-labs/blob/master/TP06/README.md)
