@@ -1,0 +1,16 @@
+node count (r:bool; Start, Incr:int) returns (c:int);
+var
+count:int;
+let
+  count = Start -> if r then Start else (Incr + pre(c));
+  c = modulo5(count);
+tel
+
+node modulo5 (x: int) returns (c:int);
+var 
+b:bool; y:int;
+let
+	y = x -> pre(y) - 5;
+	b = if (y < 0) then true else false;
+	c = current( (y + 5) when b);
+tel

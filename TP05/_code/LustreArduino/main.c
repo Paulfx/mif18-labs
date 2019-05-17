@@ -21,6 +21,20 @@ void cpt_O_led_on(void* cdata, _boolean _V) {
     digitalWrite(led, LOW);
 }
 
+void cpt_O_button_state(void* cdata, _boolean _V) {
+
+  if (_V == 1) {
+   
+    //reset
+    reset();
+
+  }
+
+  incrAndShow();
+
+  
+}
+
 
 int main(){
   

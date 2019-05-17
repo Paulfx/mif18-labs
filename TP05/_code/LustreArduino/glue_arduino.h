@@ -13,6 +13,6 @@ extern int led_on;
 extern int button_state ;
 
 void setup();
-void turnOff(); // Not Yet Implemented
-void displayDigit(int digit); // Not Yet Implemented
+void turnOff();
+void displayDigit(int digit);
 #endif
